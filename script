@@ -1,0 +1,44 @@
+function listFilesInFolder(folderName) {
+
+   var sheet = SpreadsheetApp.getActiveSheet();
+
+   sheet.appendRow(["Name", "Date", "Size", "Image"]); //ATTRIBUTES EXAMPLE "NAME", "URL", etc.
+
+   var folderId = "GOOGLE_DRIVE_FOLDER_ID";
+
+  
+
+    var folder = DriveApp.getFolderById(folderId);
+
+    var contents = folder.getFiles();
+
+    var cnt = 0;
+
+    var file;
+
+    while (contents.hasNext()) {
+
+      
+
+        var file = contents.next();
+
+        cnt++;
+
+
+            data = [
+
+                file.getName(),
+
+                file.getDateCreated(),
+
+                file.getSize(),
+
+                "=image(\"https://drive.google.com/uc?export=view&id=" + file.getId() +"\")",
+
+            ];
+
+            sheet.appendRow(data);
+
+    };
+
+};
